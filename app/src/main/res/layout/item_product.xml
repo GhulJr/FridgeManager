@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardPreventCornerOverlap="true"
-    app:cardElevation="2dp"
-    app:cardCornerRadius="2dp">
+    app:cardPreventCornerOverlap="false"
+    app:cardElevation="1dp"
+    app:cardCornerRadius="2dp"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -20,12 +21,12 @@
             android:layout_margin="16dp"
             android:layout_gravity="center"
             android:contentDescription="@string/products_image"
-            app:civ_border_width="1dp"
-            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@android:color/white"
             android:src="@mipmap/ic_launcher_round"/>
 
         <LinearLayout
-            android:layout_weight="4"
+            android:layout_weight="20"
             android:orientation="vertical"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
@@ -52,15 +53,20 @@
 
 
         <TextView
-            android:layout_weight="1"
-            android:layout_margin="16dp"
+            style="@style/ItemDate"
+            android:drawableStart="@drawable/ic_calendar_mini"
+            android:drawablePadding="4dp"
+            android:layout_weight="0.1"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
             android:id="@+id/product_expiration_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end"
+            android:gravity="center"
             android:layout_gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             tools:text="29.10.19"/>
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
