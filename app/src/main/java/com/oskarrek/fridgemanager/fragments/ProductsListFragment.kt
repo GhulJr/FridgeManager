@@ -1,6 +1,5 @@
 package com.oskarrek.fridgemanager.fragments
 
-import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -14,23 +13,24 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.oskarrek.fridgemanager.R
 import com.oskarrek.fridgemanager.adapters.ProductsListAdapter
-import com.oskarrek.fridgemanager.interfaces.IFabMorphListener
+import com.oskarrek.fridgemanager.interfaces.IMainActivityListener
 import com.oskarrek.fridgemanager.models.Product
 import com.oskarrek.fridgemanager.viewmodels.ProductsListViewModel
 import kotlinx.android.synthetic.main.content_products_list.*
 import java.lang.ClassCastException
 
-class ProductsListFragment : Fragment() {
+class ProductsListFragment :
+    Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: ProductsListAdapter
     private lateinit var viewModel: ProductsListViewModel
 
-    private lateinit var listener: IFabMorphListener
+    private lateinit var listener: IMainActivityListener
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        listener = context as? IFabMorphListener
+        listener = context as? IMainActivityListener
             ?: throw ClassCastException("$context must implement OnScrollListener")
     }
 
@@ -47,14 +47,13 @@ class ProductsListFragment : Fragment() {
         setupViewModel()
     }
 
-
     override fun onDetach() {
         super.onDetach()
         recyclerView.clearOnScrollListeners()
     }
 
     private fun setupRecyclerView() {
-        viewAdapter = ProductsListAdapter()
+        viewAdapter = ProductsListAdapter(listener)
         recyclerView = products_recycler_view.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = viewAdapter

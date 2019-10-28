@@ -9,11 +9,13 @@
     tools:showIn="@layout/activity_create_edit_product">
 
     <LinearLayout
+        android:id="@+id/product_edit_layout"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:layout_marginTop="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:paddingBottom="16dp"
         android:orientation="vertical">
 
         <EditText
@@ -45,7 +47,5 @@
             android:inputType="date"/>
 
     </LinearLayout>
-
-
 
 </androidx.core.widget.NestedScrollView>

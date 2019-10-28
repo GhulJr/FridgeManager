@@ -6,23 +6,27 @@ import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ReportFragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
-import com.oskarrek.fridgemanager.interfaces.IFabMorphListener
+import com.oskarrek.fridgemanager.interfaces.IMainActivityListener
 import com.oskarrek.fridgemanager.fragments.ProductsListFragment
 import com.oskarrek.fridgemanager.fragments.RecipesListFragment
 import com.oskarrek.fridgemanager.models.Product
 import com.oskarrek.fridgemanager.repositories.DatabaseRepository
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), IFabMorphListener {
+class MainActivity : AppCompatActivity(), IMainActivityListener {
 
     var currentItem = R.id.navigation_home
 
     companion object IntentFilters {
         const val PRODUCT_CREATE = 111
         const val PRODUCT_EDIT = 211
+        const val PRODUCT_ACTION = "PRODUCT_ACTION"
         const val PRODUCT_SERIALIZABLE = "PRODUCT_SERIALIZABLE"
+
+
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -59,15 +63,26 @@ class MainActivity : AppCompatActivity(), IFabMorphListener {
 
         when(requestCode) {
             PRODUCT_CREATE -> {
-                val product : Product = data?.getSerializableExtra(PRODUCT_SERIALIZABLE) as Product
+                val product : Product = data?.getSerializableExtra(PRODUCT_ACTION) as Product
                 DatabaseRepository.getInstance(this).insertProducts(product)
             }
             PRODUCT_EDIT -> {
-                val product : Product = data?.getSerializableExtra(PRODUCT_SERIALIZABLE) as Product
+                val product : Product = data?.getSerializableExtra(PRODUCT_ACTION) as Product
                 DatabaseRepository.getInstance(this).updateProduct(product)
             }
         }
 
+    }
+
+    override fun onClick(product: Product) {
+        val intent =  Intent(this, CreateEditProductActivity::class.java)
+        intent.putExtra(PRODUCT_ACTION, PRODUCT_EDIT)
+        intent.putExtra(PRODUCT_SERIALIZABLE, product)
+        startActivityForResult(intent, PRODUCT_EDIT)
+    }
+
+    override fun onLongClick(product: Product) {
+        DatabaseRepository.getInstance(this).deleteProduct(product)
     }
 
     private fun startFragmentTransaction(fragment : Fragment) {
@@ -104,7 +119,7 @@ class MainActivity : AppCompatActivity(), IFabMorphListener {
     private fun setupOnFabClickListener(destinationClass : Class<out Activity>) {
         main_fab_add.setOnClickListener {
             val intent = Intent(this, destinationClass)
-            intent.getStringExtra(PRODUCT_SERIALIZABLE)
+            intent.putExtra(PRODUCT_ACTION, PRODUCT_CREATE)
             startActivityForResult(intent, PRODUCT_CREATE)
         }
     }

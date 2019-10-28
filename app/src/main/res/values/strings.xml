@@ -16,6 +16,10 @@
     <string name="products_name">Nazwa produktu</string>
     <string name="products_expiration_date">Data przydatności</string>
     <string name="products_quantity">Ilość/liczba</string>
+    <string name="missing_data">Niepełne dane</string>
+    <string name="missing_data_desctrpition">Wypełnij brakujące pola.</string>
+    <string name="go_back">Wróć</string>
+    <string name="ok">OK</string>
 
 
 </resources>

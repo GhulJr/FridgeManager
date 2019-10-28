@@ -8,14 +8,18 @@
     app:cardPreventCornerOverlap="false"
     app:cardElevation="1dp"
     app:cardCornerRadius="2dp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    android:clickable="true"
+    android:focusable="true">
 
     <LinearLayout
+        android:id="@+id/product_item_layout"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="@drawable/ripple_effect_red"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:clickable="true"
-        android:focusable="true">
+        android:layout_height="72dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/product_image"
