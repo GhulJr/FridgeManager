@@ -13,8 +13,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ProductsListAdapter(val products : ArrayList<Product>) :
-
+class ProductsListAdapter(var products : ArrayList<Product> = ArrayList()) :
     RecyclerView.Adapter<ProductsListAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -29,9 +28,15 @@ class ProductsListAdapter(val products : ArrayList<Product>) :
         val product = products[position]
 
         // Inflating views.
-        //Picasso.get().load(product.imageUri).into(holder.imageView)
+        Picasso
+            .get()
+            .load(if(product.imageUri.isEmpty()) null else product.imageUri)
+            .error(R.drawable.ic_launcher_background)
+            .placeholder(R.color.colorDarkGray)
+            .into(holder.imageView)
+
         holder.nameView.text = product.name
-        holder.quantityView.text = "${product.quantity} ${product.unit}"
+        holder.quantityView.text = product.quantity
         // Formatting date.
         val date = Date(product.expirationDate)
         val dateFormat = SimpleDateFormat("dd.MM.yy")

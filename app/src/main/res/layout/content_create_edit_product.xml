@@ -8,10 +8,44 @@
     tools:context=".CreateEditProductActivity"
     tools:showIn="@layout/activity_create_edit_product">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/product_edit_name"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="@string/products_name"
+            android:layout_marginBottom="16dp"
+            android:inputType="text"
+            android:maxLength="30"/>
+
+        <EditText
+            android:id="@+id/product_edit_quantity"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="@string/products_quantity"
+            android:layout_marginBottom="16dp"
+            android:inputType="text"
+            android:maxLength="30"/>
+
+        <EditText
+            android:id="@+id/product_edit_expiration_date"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="@string/products_expiration_date"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:inputType="date"/>
+
+    </LinearLayout>
+
+
 
 </androidx.core.widget.NestedScrollView>
